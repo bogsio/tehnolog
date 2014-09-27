@@ -15,4 +15,5 @@ Features
 * Categorization, tagging
 * Comments
 * Post summary
+* Full text search
 
