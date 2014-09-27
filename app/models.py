@@ -40,6 +40,12 @@ class User(db.Model):
             return None, 'Email not registered'
 
     @staticmethod
+    def validate_password(password):
+        if len(password) >= 8:
+            return True, 'Valid Password'
+        return False, 'Passwords should have at least 8 characters'
+
+    @staticmethod
     def hash_password(password):
         return generate_password_hash(password)
 
