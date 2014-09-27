@@ -15,6 +15,8 @@ app.config['BASE_DIR'] = conf.BASE_DIR
 app.config['SQLALCHEMY_DATABASE_URI'] = conf.SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_MIGRATE_REPO'] = conf.SQLALCHEMY_MIGRATE_REPO
 app.config['THEME'] = conf.THEME
+app.config['SECRET_KEY'] = conf.SECRET_KEY
+app.config['DEBUG'] = conf.DEBUG
 
 
 theme_loader = jinja2.ChoiceLoader([
@@ -26,6 +28,6 @@ theme_loader = jinja2.ChoiceLoader([
 
 app.jinja_loader = theme_loader
 
-from app import views, models
+from app import views, models, admin
 
 logging.info('[+] Loaded configuration ...')

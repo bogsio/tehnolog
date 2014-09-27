@@ -1,10 +1,15 @@
 __author__ = 'bogdan'
 
-from themes import Theme
+from themes import BaseTheme
 
 
-class Theme(Theme):
+class Theme(BaseTheme):
     PAGES = {
-        'index': 'index.html'
+        ## Admin pages
+        'admin_index': 'admin_index.html',
+        'admin_login': 'admin_login.html',
+
+        ## Blog pages
+        'index': 'index.html',
     }
 

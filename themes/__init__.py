@@ -21,7 +21,7 @@ class ThemeManager(object):
         return ThemeModule.Theme(theme_name)
 
 
-class Theme(object):
+class BaseTheme(object):
 
     PAGES = {
         'index': 'index.html',

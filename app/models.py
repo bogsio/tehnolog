@@ -60,13 +60,28 @@ class User(db.Model):
     def login(self):
         if not self.email:
             return False
-        session['USER_ID'] = self.email
+        session['USER_ID'] = self.id
 
         logging.info('Logged In user: %s' % self.email)
         return True
 
+    @staticmethod
+    def logout():
+        del session['USER_ID']
+
     def __repr__(self):
         return '<User %r>' % (self.nickname)
+
+    @staticmethod
+    def get_current_user():
+        try:
+            user = User.query.get(int(session['USER_ID']))
+            return user
+        except KeyError:
+            return None
+        except ValueError:
+            del session['USER_ID']
+            return None
 
 
 class Post(db.Model):
