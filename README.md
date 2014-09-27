@@ -16,4 +16,4 @@ Features
 * Comments
 * Post summary
 * Full text search
-
+* Gravatar support
