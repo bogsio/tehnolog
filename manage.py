@@ -1,3 +1,4 @@
+import importlib
 from flask.ext.script import Manager, Server, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 from app import app, db, models

@@ -2,10 +2,12 @@ __author__ = 'bogdan'
 
 
 import datetime
+import importlib
 import logging
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import session
+from app import app
 
 
 class User(db.Model):
@@ -77,3 +79,6 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post %r>' % self.title
+
+
+importlib.import_module('themes.' + app.config['THEME'] + '.models')
