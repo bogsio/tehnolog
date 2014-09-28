@@ -8,6 +8,7 @@ class Theme(BaseTheme):
         ## Admin pages
         'admin_index': 'admin_index.html',
         'admin_login': 'admin_login.html',
+        'admin_add_post': 'admin_add_post.html',
 
         ## Blog pages
         'index': 'index.html',

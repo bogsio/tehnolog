@@ -1,10 +1,10 @@
 import flask
 from flask import request
 from app import app
-from app.manager import ModelManager
 from themes import ThemeManager
 from app.models import User
 from app.forms import LoginForm
+from app.manager import ModelManager
 
 Theme = ThemeManager.get_theme(app.config['THEME'])
 
@@ -13,6 +13,9 @@ def admin_index():
     user = User.get_current_user()
     if user is None:
         return flask.redirect(flask.url_for('admin_login'))
+
+
+
     return flask.render_template(Theme.get_template(page='admin_index'),
                                  manager=ModelManager)
 
@@ -44,4 +47,10 @@ def admin_login():
 def admin_logout():
     User.logout()
     return flask.redirect(flask.url_for('admin_login'))
+
+
+@app.route('/post/add/', methods=['GET', 'POST'])
+def admin_add_post():
+    return flask.render_template(Theme.get_template(page='admin_add_post'),
+                                 manager=ModelManager)
 

@@ -1,6 +1,6 @@
 from flask import session, request
 from app import app
-from app.models import User
+from app.models import User, Post
 
 
 class ModelManager(object):
@@ -15,7 +15,7 @@ class ModelManager(object):
 
     @classmethod
     def posts(cls, page=1):
-        pass
+        return Post.query.all()
 
     @classmethod
     def post(cls, post_id):
