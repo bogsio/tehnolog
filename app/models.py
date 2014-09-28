@@ -19,12 +19,6 @@ class User(db.Model):
     posts = db.relationship('Post', backref='author',
                             lazy='dynamic')
 
-    def set_password(self, password):
-        pass
-
-    def check_password(self, password):
-        pass
-
     @staticmethod
     def authenticate(email, password):
         existing_user = User.query.filter_by(email=email).first()
