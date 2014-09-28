@@ -20,7 +20,7 @@ def admin_index():
                                  manager=ModelManager)
 
 
-@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/admin/login/', methods=['GET', 'POST'])
 def admin_login():
     user = User.get_current_user()
     if user is not None:
@@ -43,14 +43,19 @@ def admin_login():
                                  manager=ModelManager, form=login_form)
 
 
-@app.route('/logout/', methods=['GET', 'POST'])
+@app.route('/admin/logout/', methods=['GET', 'POST'])
 def admin_logout():
     User.logout()
     return flask.redirect(flask.url_for('admin_login'))
 
 
-@app.route('/post/add/', methods=['GET', 'POST'])
+@app.route('/admin/post/add/', methods=['GET', 'POST'])
 def admin_add_post():
     return flask.render_template(Theme.get_template(page='admin_add_post'),
                                  manager=ModelManager)
 
+@app.route('/admin/post/<id>/', methods=['GET', 'POST'])
+def admin_detail_post(id):
+    return flask.render_template(Theme.get_template(page='admin_detail_post'),
+                                 manager=ModelManager,
+                                 post_id=id)
