@@ -8,7 +8,10 @@ import conf
 import os
 import logging
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=os.path.join(conf.BASE_DIR,
+                                                 'themes',
+                                                 conf.THEME,
+                                                 'static'))
 db = SQLAlchemy(app)
 
 app.config['BASE_DIR'] = conf.BASE_DIR
