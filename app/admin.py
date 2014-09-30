@@ -1,9 +1,9 @@
 import flask
 from flask import request
-from app import app
+from app import app, db
 from themes import ThemeManager
-from app.models import User
-from app.forms import LoginForm
+from app.models import User, Post
+from app.forms import LoginForm, PostForm
 from app.manager import ModelManager
 
 Theme = ThemeManager.get_theme(app.config['THEME'])
@@ -51,8 +51,20 @@ def admin_logout():
 
 @app.route('/admin/post/add/', methods=['GET', 'POST'])
 def admin_add_post():
+    form = PostForm()
+
+    if request.method == 'POST' and form.validate_on_submit():
+        post = Post(title=request.form['title'],
+                    content=request.form['content'],
+                    summary=request.form['summary'])
+        db.session.add(post)
+        db.session.commit()
+        db.session.flush()
+        flask.flash('Your post has been created', 'success')
+
     return flask.render_template(Theme.get_template(page='admin_add_post'),
-                                 manager=ModelManager)
+                                 manager=ModelManager,
+                                 post_form=form)
 
 @app.route('/admin/post/<id>/', methods=['GET', 'POST'])
 def admin_detail_post(id):

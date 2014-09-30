@@ -2,24 +2,59 @@
 <html>
 <head>
     <title></title>
-    <!--<script src="{{ url_for('static', filename='epiceditor.css') }}"></script>-->
-    <!--<script src="{{ url_for('static', filename='epic-dark.css') }}"></script>-->
-    <!--<script src="{{ url_for('static', filename='github.css') }}"></script>-->
-    <!--<script src="{{ url_for('static', filename='epiceditor.js') }}"></script>-->
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-markdown.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 </head>
 <body>
+    <div class="container-fluid">
+    <div class="col-md-2">
+        <h2>Tehnolog Admin</h2>
+    </div>
+    <div class="col-md-10">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     <h1>New Post</h1>
-    <form>
-    <input name="title" type="text" placeholder="Title?" />
-    <textarea name="content" data-provide="markdown" rows="10"></textarea>
-    <label class="checkbox">
-      <input name="publish" type="checkbox"> Publish
-    </label>
-    <hr/>
-    <button type="submit" class="btn">Submit</button>
-  </form>
+    <form role="form" method="post">
+        {{ post_form.csrf_token }}
+
+        <div class="form-group">
+            {% if post_form.errors['title'] %}
+            <label for="title" class="alert-danger">Title: {{ post_form.errors['title'][0] }} </label>
+            {% else %}
+            <label for="title">Title</label>
+            {% endif %}
+
+            <input class="form-control"     id="title" name="title" type="text" placeholder="Title" />
+        </div>
+        <div class="form-group">
+            {% if post_form.errors['content'] %}
+            <label for="content" class="alert-danger">Content: {{ post_form.errors['content'][0] }} </label>
+            {% else %}
+            <label for="content">Content</label>
+            {% endif %}
+            <textarea id="content" name="content" data-provide="markdown" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+            {% if post_form.errors['summary'] %}
+            <label for="summary" class="alert-danger">Summary: {{ post_form.errors['summary'][0] }} </label>
+            {% else %}
+            <label for="summary">Summary</label>
+            {% endif %}
+            <textarea class="form-control" id="summary" name="summary" width="100%" rows="3"></textarea>
+        </div>
+        <hr/>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-share"></i> Publish</button>
+    </form>
+    </div>
+    </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"type="text/javascript"></script>
