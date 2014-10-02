@@ -21,7 +21,7 @@ Tehnolog Dashboard
         </tr>
     </thead>
     <tbody>
-        {% for post in manager.posts() %}
+        {% for post in manager.posts(page=page, rpp=10) %}
         <tr>
             <td>
                 <strong>{{ post.id }}</strong>
@@ -39,4 +39,13 @@ Tehnolog Dashboard
         {% endfor %}
     </tbody>
 </table>
+
+<ul class="pager">
+    {% if page > 1 %}
+    <li><a href="{{ url_for('admin_index') }}?page={{ page - 1 }}">Previous</a></li>
+    {% endif %}
+    {% if manager.posts(page=page, rpp=10) %}
+    <li><a href="{{ url_for('admin_index') }}?page={{ page + 1 }}">Next</a></li>
+    {% endif %}
+</ul>
 {% endblock %}

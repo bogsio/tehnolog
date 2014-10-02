@@ -13,11 +13,14 @@ def admin_index():
     user = User.get_current_user()
     if user is None:
         return flask.redirect(flask.url_for('admin_login'))
-
-
+    try:
+        page = int(request.args.get('page', 1))
+    except ValueError:
+        page = 1
 
     return flask.render_template(Theme.get_template(page='admin_index'),
-                                 manager=ModelManager)
+                                 manager=ModelManager,
+                                 page=page)
 
 
 @app.route('/admin/login/', methods=['GET', 'POST'])
