@@ -1,0 +1,47 @@
+{% extends 'default/templates/admin_base.html' %}
+
+{% block page_header %}
+Tehnolog Dashboard
+{% endblock %}
+
+{% block controls %}
+<form class="form" role="form" method="post">
+    {{ form.csrf_token }}
+    {% if form.errors['category_name'] %}
+    <label for="category_name" class="alert-danger">Category Name: {{ form.errors['category_name'][0] }} </label>
+    {% else %}
+    <label for="category_name">Category Name</label>
+    {% endif %}
+    <div class="input-group">
+        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Category Name">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit">Create</button>
+        </span>
+    </div><!-- /input-group -->
+</form>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in manager.categories() %}
+        <tr>
+            <td>
+                <strong>{{ category.id }}</strong>
+            </td>
+            <td>
+                {{ category.name }}
+            </td>
+            <td>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

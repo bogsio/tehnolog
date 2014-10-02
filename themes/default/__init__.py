@@ -10,7 +10,7 @@ class Theme(BaseTheme):
         'admin_login': 'admin_login.html',
         'admin_add_post': 'admin_add_post.html',
         'admin_detail_post': 'admin_detail_post.html',
-
+        'admin_categories': 'admin_categories.html',
         ## Blog pages
         'index': 'index.html',
     }

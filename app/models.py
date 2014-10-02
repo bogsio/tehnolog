@@ -19,6 +19,7 @@ class User(db.Model):
     posts = db.relationship('Post', backref='author',
                             lazy='dynamic')
 
+
     @staticmethod
     def authenticate(email, password):
         existing_user = User.query.filter_by(email=email).first()
@@ -85,9 +86,18 @@ class Post(db.Model):
     summary = db.Column(db.Text, default='')
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+
 
     def __repr__(self):
         return '<Post %r>' % self.title
+
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200))
+    posts = db.relationship('Post', backref='category',
+                            lazy='dynamic')
 
 
 importlib.import_module('themes.' + app.config['THEME'] + '.models')

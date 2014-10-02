@@ -1,6 +1,6 @@
 from flask import session, request
 from app import app
-from app.models import User, Post
+from app.models import User, Post, Category
 
 
 class ModelManager(object):
@@ -20,3 +20,7 @@ class ModelManager(object):
     @classmethod
     def post(cls, post_id):
         return Post.query.get(post_id)
+
+    @classmethod
+    def categories(cls):
+        return Category.query.all()

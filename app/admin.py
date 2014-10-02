@@ -2,8 +2,8 @@ import flask
 from flask import request
 from app import app, db
 from themes import ThemeManager
-from app.models import User, Post
-from app.forms import LoginForm, PostForm
+from app.models import User, Post, Category
+from app.forms import LoginForm, PostForm, CategoryForm
 from app.manager import ModelManager
 
 Theme = ThemeManager.get_theme(app.config['THEME'])
@@ -50,6 +50,22 @@ def admin_login():
 def admin_logout():
     User.logout()
     return flask.redirect(flask.url_for('admin_login'))
+
+
+@app.route('/admin/categories', methods=['GET', 'POST'])
+def admin_categories():
+    category_form = CategoryForm()
+
+    if request.method == 'POST' and category_form.validate_on_submit():
+        category = Category(name=request.form['category_name'])
+
+        db.session.add(category)
+        db.session.commit()
+        db.session.flush()
+        flask.flash('Your category has been created', 'success')
+
+    return flask.render_template(Theme.get_template(page='admin_categories'),
+                                 manager=ModelManager, form=category_form)
 
 
 @app.route('/admin/post/add/', methods=['GET', 'POST'])
