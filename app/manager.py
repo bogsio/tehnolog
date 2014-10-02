@@ -15,7 +15,7 @@ class ModelManager(object):
 
     @classmethod
     def posts(cls, page=1, rpp=10):
-        return Post.query.paginate(page, rpp, False).items
+        return Post.query.order_by(Post.created.desc()).paginate(page, rpp, False).items
 
     @classmethod
     def post(cls, post_id):
