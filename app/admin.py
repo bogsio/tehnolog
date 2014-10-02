@@ -57,6 +57,7 @@ def admin_add_post():
         post = Post(title=request.form['title'],
                     content=request.form['content'],
                     summary=request.form['summary'])
+        post.author_id = ModelManager.current_user().id
         db.session.add(post)
         db.session.commit()
         db.session.flush()
