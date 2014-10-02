@@ -14,9 +14,9 @@ class ModelManager(object):
             return None
 
     @classmethod
-    def posts(cls, page=1):
-        return Post.query.all()
+    def posts(cls, page=1, rpp=10):
+        return Post.query.paginate(page, rpp, False).items
 
     @classmethod
     def post(cls, post_id):
-        pass
+        return Post.query.get(post_id)

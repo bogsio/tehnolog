@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-markdown.min.css') }}"/>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="col-md-2">
+            <h2>Tehnolog Admin</h2>
+        </div><!-- /col-md-2 -->
+        <div class="col-md-10">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+            <h1>{% block page_header %} Page Title {% endblock %}</h1>
+            {% block controls %} Controls {% endblock %}
+        </div><!-- col-md-10 -->
+    </div><!-- /container-fluid -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

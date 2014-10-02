@@ -1,41 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    Admin Index
-    <hr/>
-    <a href="{{ url_for('admin_add_post') }}">New</a>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Created</th>
-                <th>Summary</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for post in manager.posts() %}
-            <tr>
-                <td>
-                    <strong>{{ post.id }}</strong>
-                </td>
-                <td>
-                    <a href="{{ url_for('admin_detail_post', id=post.id) }}">{{ post.title }}</a>
-                </td>
-                <td>{{ post.author.nickname }}</td>
-                <td>{{ post.created }}</td>
-                <td>{{ post.summary }}</td>
-                <td>
+{% extends 'default/templates/admin_base.html' %}
 
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+{% block page_header %}
+Tehnolog Dashboard
+{% endblock %}
+
+{% block controls %}
+<a href="{{ url_for('admin_add_post') }}">New</a>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Created</th>
+            <th>Summary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in manager.posts() %}
+        <tr>
+            <td>
+                <strong>{{ post.id }}</strong>
+            </td>
+            <td>
+                <a href="{{ url_for('admin_detail_post', id=post.id) }}">{{ post.title }}</a>
+            </td>
+            <td>{{ post.author.nickname }}</td>
+            <td>{{ post.created }}</td>
+            <td>{{ post.summary }}</td>
+            <td>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

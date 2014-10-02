@@ -4,6 +4,8 @@
     <title></title>
 </head>
 <body>
-    Hello Mate!
+{% for post in manager.posts(page, 10) %}
+{{ post.title }}
+{% endfor %}
 </body>
 </html>
