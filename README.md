@@ -17,3 +17,5 @@ Features
 * Post summary
 * Full text search
 * Gravatar support
+* RDF support
+* Google Knowledge Graph
