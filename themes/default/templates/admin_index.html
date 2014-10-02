@@ -5,7 +5,10 @@ Tehnolog Dashboard
 {% endblock %}
 
 {% block controls %}
-<a href="{{ url_for('admin_add_post') }}">New</a>
+<a class="btn btn-primary" role="button" href="{{ url_for('admin_add_post') }}">
+    <i class="fa fa-pencil"></i> Create Post
+</a>
+
 <table class="table table-striped table-hover">
     <thead>
         <tr>
