@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"type="text/javascript"></script>
+<script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js" type="text/javascript"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/markdown.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/to-markdown.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-markdown.js') }}"></script>
@@ -26,7 +26,8 @@ New Post
         <label for="title">Title</label>
         {% endif %}
 
-        <input class="form-control"     id="title" name="title" type="text" placeholder="Title" />
+        <input class="form-control" id="title" name="title" type="text" placeholder="Title"
+               value="{% if post_form.title.data %}{{ post_form.title.data }}{% endif %}"/>
     </div>
     <div class="form-group">
         {% if post_form.errors['content'] %}
@@ -34,7 +35,7 @@ New Post
         {% else %}
         <label for="content">Content</label>
         {% endif %}
-        <textarea id="content" name="content" data-provide="markdown" rows="10"></textarea>
+        <textarea id="content" name="content" data-provide="markdown" rows="10">{% if post_form.content.data %}{{ post_form.content.data }}{% endif %}</textarea>
     </div>
     <div class="form-group">
         {% if post_form.errors['category'] %}
@@ -45,7 +46,7 @@ New Post
         <select class="form-control" name="category" id="category">
             <option value="">-</option>
             {% for cat in manager.categories() %}
-            <option value="{{ cat.id }}">{{ cat.name }}</option>
+            <option value="{{ cat.id }}" {% if cat.id == post_form.category.data %}selected{% endif %}>{{ cat.name }}</option>
             {% endfor %}
         </select>
     </div>
@@ -55,7 +56,7 @@ New Post
         {% else %}
         <label for="summary">Summary</label>
         {% endif %}
-        <textarea class="form-control" id="summary" name="summary" width="100%" rows="3"></textarea>
+        <textarea class="form-control" id="summary" name="summary" width="100%" rows="3">{% if post_form.summary.data %}{{ post_form.summary.data }}{% endif %}</textarea>
     </div>
     <hr/>
     <button type="submit" class="btn btn-primary"><i class="fa fa-share"></i> Publish</button>
