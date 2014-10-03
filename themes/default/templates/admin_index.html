@@ -14,6 +14,7 @@ Tehnolog Dashboard
         <tr>
             <th>ID</th>
             <th>Title</th>
+            <th>Category</th>
             <th>Author</th>
             <th>Created</th>
             <th>Summary</th>
@@ -29,6 +30,7 @@ Tehnolog Dashboard
             <td>
                 <a href="{{ url_for('admin_detail_post', id=post.id) }}">{{ post.title }}</a>
             </td>
+            <td>{{ post.category.name}}</td>
             <td>{{ post.author.nickname }}</td>
             <td>{{ post.created }}</td>
             <td>{{ post.summary }}</td>

@@ -37,6 +37,19 @@ New Post
         <textarea id="content" name="content" data-provide="markdown" rows="10"></textarea>
     </div>
     <div class="form-group">
+        {% if post_form.errors['category'] %}
+        <label for="category" class="alert-danger">Category: {{ post_form.errors['category'][0] }} </label>
+        {% else %}
+        <label for="category">Category</label>
+        {% endif %}
+        <select class="form-control" name="category" id="category">
+            <option value="">-</option>
+            {% for cat in manager.categories() %}
+            <option value="{{ cat.id }}">{{ cat.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
         {% if post_form.errors['summary'] %}
         <label for="summary" class="alert-danger">Summary: {{ post_form.errors['summary'][0] }} </label>
         {% else %}

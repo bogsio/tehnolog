@@ -34,3 +34,5 @@ app.jinja_loader = theme_loader
 from app import views, models, admin
 
 logging.info('[+] Loaded configuration ...')
+
+logger = logging.getLogger('werkzeug')

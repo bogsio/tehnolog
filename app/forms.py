@@ -1,6 +1,6 @@
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, TextAreaField
-from wtforms.validators import DataRequired, Email
+from wtforms import StringField, PasswordField, TextAreaField, IntegerField
+from wtforms.validators import DataRequired, Email, Optional
 
 
 class LoginForm(Form):
@@ -12,6 +12,7 @@ class PostForm(Form):
     title = StringField('title', validators=[DataRequired()])
     content = TextAreaField('content', validators=[DataRequired()])
     summary = TextAreaField('summary', validators=[DataRequired()])
+    category = IntegerField('category', validators=[Optional()])
 
 
 class CategoryForm(Form):
