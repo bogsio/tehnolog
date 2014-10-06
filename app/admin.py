@@ -80,6 +80,8 @@ def admin_add_post():
         post.author_id = ModelManager.current_user().id
         post.category_id = form.category.data
 
+        post.before_save()
+
         db.session.add(post)
         db.session.commit()
         db.session.flush()

@@ -4,10 +4,13 @@ __author__ = 'bogdan'
 import datetime
 import importlib
 import logging
+import markdown
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import session
+from flask import session, current_app
+from flask.ext.sqlalchemy import before_models_committed
 from app import app
+
 
 
 class User(db.Model):
@@ -79,14 +82,21 @@ class User(db.Model):
             return None
 
 
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), default='Title')
     content = db.Column(db.Text, default='')
+    html_content = db.Column(db.Text, default='')
     summary = db.Column(db.Text, default='')
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+
+
+    def before_save(self):
+        self.html_content = markdown.markdown(self.content)
+
 
 
     def __repr__(self):
