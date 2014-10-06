@@ -5,7 +5,7 @@
 </head>
 <body>
 {% for post in manager.posts(page, 10) %}
-{{ post.title }}
+{{ post.title }} {{ post.slug }}
 {{ post.html_content|safe }}
 {% endfor %}
 </body>

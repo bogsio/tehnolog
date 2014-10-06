@@ -7,8 +7,8 @@ import logging
 import markdown
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import session, current_app
-from flask.ext.sqlalchemy import before_models_committed
+from flask import session
+from slugify import slugify
 from app import app
 
 
@@ -86,6 +86,7 @@ class User(db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), default='Title')
+    slug = db.Column(db.String(200), default='')
     content = db.Column(db.Text, default='')
     html_content = db.Column(db.Text, default='')
     summary = db.Column(db.Text, default='')
@@ -97,6 +98,8 @@ class Post(db.Model):
     def before_save(self):
         self.html_content = markdown.markdown(self.content)
 
+        if not self.slug:
+            self.slug = slugify(self.title)
 
 
     def __repr__(self):
